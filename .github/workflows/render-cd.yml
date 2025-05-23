@@ -1,16 +1,19 @@
 name: CD to Render
 
 on:
-  push:
-    branches:
-      - main  # Trigger only on push to main
+  workflow_run:
+    workflows: ["docker-build-push"]
+    types:
+      - completed
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Trigger Render Deploy Hook
         run: |
-          echo "Triggering Render deployment..."
+          echo "✅ CI workflow completed successfully. Triggering Render deployment..."
           curl -X GET "${{ secrets.RENDER_DEPLOY_HOOK }}"
+
