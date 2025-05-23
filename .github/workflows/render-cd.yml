@@ -2,7 +2,7 @@ name: CD to Render
 
 on:
   workflow_run:
-    workflows: ["docker-build-push"]
+    workflows: ["Build and Push Slim Docker Image"]
     types:
       - completed
 
