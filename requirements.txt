@@ -1,6 +1,7 @@
 streamlit
 scikit-learn
 pandas
+seaborn
 numpy
 joblib
 python-dotenv
